@@ -1,10 +1,17 @@
 const int buzzer = 9; //buzzer to arduino pin 9
 
+int redpin = 10;      //select the pin for the red LED
+int greenpin = 11;    // select the pin for the green LED
+
+
 void setup(){
 
     pinMode(buzzer, OUTPUT); // Set buzzer - pin 9 as an output
     Serial.begin(9600); // Set serial baud rate to 9600 bps
-
+  
+    pinMode(redpin, OUTPUT);
+    pinMode(greenpin, OUTPUT);
+  
 }
 
 void loop(){
@@ -25,6 +32,7 @@ void loop(){
 
 
 void buzzerCall(){
+    flashRedLight();
     tone(buzzer, 500);  // Send 1KHz sound signal...
     delay(1000);        // ...for 1 sec
     noTone(buzzer);     // Stop sound...
@@ -32,5 +40,17 @@ void buzzerCall(){
 }
 
 void nobuzzer(){
+    flashGreenLight();
     noTone(buzzer);     // turn off the alarm
+}
+
+
+void flashRedLight(){
+      analogWrite(11,0);
+      analogWrite(10, 254);
+}
+
+void flashGreenLight(){
+      analogWrite(10,0);
+      analogWrite(11, 254);
 }
