@@ -3,26 +3,23 @@ const int buzzer = 9; //buzzer to arduino pin 9
 void setup(){
 
     pinMode(buzzer, OUTPUT); // Set buzzer - pin 9 as an output
-    Serial.begin(9600); //Set serial baud rate to 9600 bps
+    Serial.begin(9600); // Set serial baud rate to 9600 bps
 
 }
 
 void loop(){
 
-    //buzzerCall();
-
     int val;
     val=analogRead(0);  //Read Gas value from analog 0
-    Serial.println(val,DEC);  //Print the value to serial port
+    Serial.println(val,DEC);  //Print the value to serial port in Decimal form
 
-    if (int(val) > 500) {
-        buzzerCall();
+    if (int(val) > 500) {   // 500 seems to be the threshold for detecting a lighter held near the sensor, ring the buzzer
+        buzzerCall();   
     }
     else {
-        nobuzzer();
+        nobuzzer();         // turn off the buzzer if the value from the sensor is less then 500
     }
-    
-    
+       
     delay(100);
 }
 
